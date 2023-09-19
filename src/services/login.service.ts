@@ -1,11 +1,11 @@
 import bcrypt from 'bcryptjs';
-import * as jwtUtil from '../utils/jwt.util';
+import jwtUtil from '../utils/jwt.util';
 import Login from '../types/Login';
 import { Token } from '../types/Token';
 import UserModel from '../database/models/user.model';
 import { ServiceResponse } from '../types/ServiceResponse';
 
-export const verifyLogin = async (login: Login): Promise<ServiceResponse<Token>> => {
+const verifyLogin = async (login: Login): Promise<ServiceResponse<Token>> => {
   if (!login.username || !login.password) {
     return {
       status: 'INVALID_DATA',
@@ -23,6 +23,7 @@ export const verifyLogin = async (login: Login): Promise<ServiceResponse<Token>>
   }
 
   const { id, username } = user.dataValues;
+  // eslint-disable-next-line import/no-named-as-default-member
   const token = jwtUtil.sign({ id: Number(id), username });
   return { status: 'SUCCESSFUL', data: { token } };
 };
