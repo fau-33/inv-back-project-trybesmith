@@ -35,6 +35,16 @@ const createProduct = async (product: Product): Promise<ServiceResponse<Product>
   return responseService;
 };
 
+const findAllProducts = async (): Promise<ServiceResponse<Array<object>>> => {
+  const products = await ProductModel.findAll();
+
+  return {
+    status: 'SUCCESSFUL',
+    data: products,
+  };
+};
+
 export default {
   createProduct,
+  findAllProducts,
 };
