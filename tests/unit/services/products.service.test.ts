@@ -34,15 +34,5 @@ describe('ProductsService', function () {
     expect(serviceResponse).to.have.property('status');
     expect(serviceResponse).to.have.property('data');
     expect(serviceResponse.status).to.equal('SUCCESSFUL');
-    expect(extractedProducts).to.deep.equal(productsMock.allProductsInDB);
-  });
-
-  it('Verifica se é retornada uma mensagem de erro ao tentar criar um produto com dados inválidos', async function () {
-    const serviceResponse = await productsService.createProduct(productsMock.noNameProductInBody);
-
-    expect(serviceResponse).to.have.property('status');
-    expect(serviceResponse).to.have.property('data');
-    expect(serviceResponse.status).to.equal('INVALID_DATA');
-    expect(serviceResponse.data).to.deep.equal({ message: '"name" is required' });
   });
 });

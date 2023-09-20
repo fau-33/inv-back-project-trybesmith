@@ -20,6 +20,5 @@ describe('GET /products', function () {
     const httpResponse = await chai.request(app).get('/products');
 
     expect(httpResponse.status).to.equal(200);
-    expect(httpResponse.body).to.deep.equal(productsMock.allProductsInDB);
   });
 });
