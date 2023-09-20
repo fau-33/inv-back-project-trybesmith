@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import jwtUtil from '../utils/jwt.util';
+import { sign } from '../utils/jwt.util';
 import Login from '../types/Login';
 import { Token } from '../types/Token';
 import UserModel from '../database/models/user.model';
@@ -22,9 +22,9 @@ const verifyLogin = async (login: Login): Promise<ServiceResponse<Token>> => {
     };
   }
 
-  const { id, username } = user.dataValues;
-  // eslint-disable-next-line import/no-named-as-default-member
-  const token = jwtUtil.sign({ id: Number(id), username });
+  const { id } = user.dataValues;
+  const { username } = user.dataValues;
+  const token = sign({ id: Number(id), username });
   return { status: 'SUCCESSFUL', data: { token } };
 };
 
